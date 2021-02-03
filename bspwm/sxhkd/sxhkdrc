@@ -1,8 +1,4 @@
 #################################################################
-# KEYBOARD BINDINGS FOR ANY TWM
-#################################################################
-
-#################################################################
 # SUPER + FUNCTION KEYS
 #################################################################
 
@@ -15,17 +11,11 @@ super + F11
 # SUPER + ... KEYS
 #################################################################
 
-#Atom
-super + e
-    atom
+
 
 #Browser
 super + w
     brave
-
-#Conky-toggle
-super + c
-    conky-toggle
 
 #Htop
 super + h
@@ -52,7 +42,7 @@ super + v
 super + m
     pragha
 
-#Termite
+#Terminal
 super + Return
     urxvt
 
@@ -150,17 +140,9 @@ ctrl + alt + s
 #     SCREENSHOTS
 #################################################################
 
-#Scrot
+#Rofi-Menu
 Print
     /home/notmehul/.config/rofi/applets/menu/screenshot.sh
-
-#screeenshooter
-ctrl + Print
-     xfce4-screenshooter
-
-#Gnome-Screenshot
-ctrl + shift + Print
-     gnome-screenshot -i
 
 
 #################################################################

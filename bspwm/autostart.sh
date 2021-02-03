@@ -18,10 +18,8 @@ bash ~/.config/polybar/launch.sh --forest
 #change your keyboard if you need it
 #setxkbmap -layout be
 
-#Some ways to set your wallpaper besides variety or nitrogen
-#feh --bg-scale ~/.config/bspwm/wall.png &
-#feh --bg-fill /home/notmehul/wallpapers/stephen-zavala-fireball-ghibli-1-sz.jpg &
-#feh --randomize --bg-fill ~/Képek/*
+#Some ways to setting your wallpaper
+
 feh --randomize --bg-fill /home/notmehul/wallpapers/* 
 
 
@@ -41,13 +39,3 @@ picom --config $HOME/.config/bspwm/picom.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 run volumeicon &
-#nitrogen --restore &
-#run caffeine &
-#run vivaldi-stable &
-#run firefox &
-#run thunar &
-#run dropbox &
-#run insync start &
-#run discord &
-#run spotify &
-#run atom &

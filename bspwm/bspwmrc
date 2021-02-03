@@ -1,6 +1,5 @@
 #! /bin/sh
 
-#feh --no-fehbg --bg-fill "$HOME/.config/bspwm/wallpaper"
 
 $HOME/.config/bspwm/autostart.sh
 
@@ -38,18 +37,8 @@ bspc config external_rules_command $HOME/.config/bspwm/external_rules.sh
 #open applications on specific workspaces
 bspc rule -a brave desktop='^1' follow=on
 bspc rule -a firefox desktop='^1' follow=on
-#bspc rule -a Chromium desktop='^1'  follow=on
 bspc rule -a Subl3 desktop='^2' follow=on
-#bspc rule -a Atom desktop='^2' follow=on
-#bspc rule -a Steam desktop='^5'
-#bspc rule -a vlc desktop='^6'  follow=on
-#bspc rule -a mpv desktop='^6'  follow=on
-#bspc rule -a Vivaldi-stable desktop='^6' follow=on
-#bspc rule -a Vivaldi-snapshot desktop='^6' follow=on
-#bspc rule -a Transmission-gtk desktop='^7' follow=on
-#bspc rule -a Thunar desktop='^8' follow=on
 bspc rule -a discord desktop='^4' follow=on
-#bspc rule -a Spotify desktop='^10' follow=on
 
 
 
@@ -60,10 +49,3 @@ bspc rule -a lf locked=on sticky=on state=floating hidden=on
 bspc rule -a Surf state=pseudo_tiled
 bspc rule -a Dragon-drag-and-drop locked=on sticky=on 
 bspc rule -a cool-retro-term state=pseudo_tiled
-
-
-###External rules
-##Pseudo automatic mode: always splits focused window when opening new window
-#bspc config external_rules_command ~/.config/bspwm/scripts/pseudo_automatic_mode
-##Adjust new window: splits biggest windows to keep windows about the same size
-#bspc config external_rules_command ~/.config/bspwm/scripts/adjust-new-window
