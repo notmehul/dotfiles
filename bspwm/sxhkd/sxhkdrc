@@ -1,0 +1,405 @@
+#################################################################
+# KEYBOARD BINDINGS FOR ANY TWM
+#################################################################
+
+#################################################################
+# SUPER + FUNCTION KEYS
+#################################################################
+
+#Rofi Fullscreen
+super + F11
+    rofi -show run -fullscreen
+
+
+#################################################################
+# SUPER + ... KEYS
+#################################################################
+
+#Atom
+super + e
+    atom
+
+#Browser
+super + w
+    brave
+
+#Conky-toggle
+super + c
+    conky-toggle
+
+#Htop
+super + h
+    urxvt 'htop task manager' -e htop
+
+#arcolinux logout
+super + x
+    arcolinux-logout
+
+#Rofi theme selector
+super + r
+    rofi-theme-selector
+
+#rofi
+super + d
+	bash /home/notmehul/.config/rofi/launchers/launcher.sh
+
+
+#Pavucontrol
+super + v
+    pavucontrol
+
+#Pragha
+super + m
+    pragha
+
+#Termite
+super + Return
+    urxvt
+
+#Xkill
+super + Escape
+    xkill
+
+#move desktops
+super + {1-9,0}
+    bspc desktop -f focused:'^{1-9,10}'
+
+#wifi
+super + n
+    bash /home/notmehul/.config/rofi/applets/applets/network.sh
+
+
+
+
+#################################################################
+# SUPER + SHIFT KEYS
+#################################################################
+
+#File-Manager
+super + shift + Return
+	pcmanfm
+
+
+#reload sxhkd:
+super + shift + s
+	pkill -USR1 -x sxhkd
+
+
+#################################################################
+# CONTROL + ALT KEYS
+#################################################################
+
+#arcolinux-welcome-app
+ctrl + alt + w
+     arcolinux-welcome-app
+
+#arcolinux-tweak-tool
+ctrl + alt + e
+    arcolinux-tweak-tool
+
+#conky-rotate
+ctrl + alt + Next
+     conky-rotate -n
+
+#conky-rotate
+ctrl + alt + Prior
+    conky-rotate -p
+
+#File-Manager
+ctrl + alt + b
+     pcmanfm
+
+#Catfish
+ctrl + alt + c
+     catfish
+
+
+#Firefox
+ctrl + alt + f
+     firefox
+
+#arcolinux-logout
+ctrl + alt + k
+     arcolinux-logout
+
+#arcolinux-logout
+ctrl + alt + l
+    arcolinux-logout
+
+#Pamac-manager
+ctrl + alt + p
+    pamac-manager
+
+#Xfce4-settings-manager
+ctrl + alt + m
+     xfce4-settings-manager
+
+#Pulse Audio Control
+ctrl + alt + u
+     pavucontrol
+
+#Rofi theme selector
+ctrl + alt + r
+  rofi-theme-selector
+
+#Spotify
+ctrl + alt + s
+   spotify
+
+#################################################################
+#     SCREENSHOTS
+#################################################################
+
+#Scrot
+Print
+    /home/notmehul/.config/rofi/applets/menu/screenshot.sh
+
+#screeenshooter
+ctrl + Print
+     xfce4-screenshooter
+
+#Gnome-Screenshot
+ctrl + shift + Print
+     gnome-screenshot -i
+
+
+#################################################################
+#     MULTIMEDIA KEYS
+#################################################################
+
+#Raises volume
+XF86AudioRaiseVolume
+    amixer set Master 10%+
+
+#Lowers volume
+XF86AudioLowerVolume
+    amixer set Master 10%-
+
+#Mute
+XF86AudioMute
+    amixer -D pulse set Master 1+ toggle
+
+#Playerctl works for Pragha, Spotify and others
+#Delete the line for playerctl if you want to use mpc
+#and replace it with the corresponding code
+#mpc works for e.g.ncmpcpp
+#mpc toggle
+#mpc next
+#mpc prev
+#mpc stop
+
+#PLAY
+XF86AudioPlay
+    playerctl play-pause
+
+#Next
+XF86AudioNext
+    playerctl next
+
+#previous
+XF86AudioPrev
+    playerctl previous
+
+#Stop
+XF86AudioStop
+    playerctl stop
+
+#Brightness up
+XF86MonBrightnessUp
+    light -A 10
+
+#Brightness down
+XF86MonBrightnessDown
+    light -U 10
+
+#########################
+#        POLYBAR        #
+#########################
+
+#Hide polybar
+super + y
+    polybar-msg cmd toggle
+
+#################################################################
+#################################################################
+##################   DESKTOP SPECIFIC    ########################
+#################################################################
+#################################################################
+ 
+#################################################################
+# CTRL + ALT KEYS
+#################################################################
+
+#Picom Toggle
+ctrl + alt + o
+    ~/.config/bspwm/scripts/picom-toggle.sh
+
+#################################################################
+# SUPER + KEYS
+#################################################################
+
+#Toggle fullscreen of window
+super + f
+	bspc node --state \~fullscreen
+
+# Toggle pseudo tiling of window
+super + p
+	bspc node --state \~pseudo_tiled
+
+#kill
+super + q
+	bspc node -c
+
+#################################################################
+# SUPER KEYS
+#################################################################
+
+#Focus selected desktop
+super + Tab
+	bspc desktop -f '^{1-9,10}'
+
+# Increase/decrease window gap on focused desktop
+super + bracket{left,right}
+	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
+
+# set the window state
+super + space
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# Move focus to other monitor
+super + BackSpace
+		bspc monitor -f next
+
+#################################################################
+# SUPER + ALT KEYS
+#################################################################
+
+# Move floating window
+super + alt + {_,shift + }{Left,Down,Up,Right}
+	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
+
+#################################################################
+# SUPER + CONTROL KEYS
+#################################################################
+
+# Cancel preselection
+super + ctrl + space
+	bspc node --presel-dir cancel
+
+#################################################################
+# SUPER + SHIFT KEYS
+#################################################################
+
+
+#Reload bspwm
+super + shift + r
+	~/.config/bspwm/bspwmrc
+
+#kill
+super + shift + q
+	bspc node -c
+
+#Logout
+#super + shift + x
+#	bspc quit
+
+# Focus/swap windows by direction
+super + {_,shift + }{h,j,k,l}
+	bspc node --{focus,swap} {west,south,north,east}
+
+# Flip layout vertically/horizontally
+super + {_,shift + }a
+	bspc node @/ --flip {vertical,horizontal}
+
+# Move focused window to other monitor
+super + shift + Left
+	bspc node -m next --follow
+
+# Move focused window to other monitor
+super + shift + Right
+		bspc node -m next --follow
+
+# Move focused window to other monitor
+super + shift + Up
+	bspc node -m next --follow
+
+# Move focused window to other monitor
+super + shift + Down
+		bspc node -m next --follow
+
+#################################################################
+# SUPER + CONTROL KEYS
+#################################################################
+
+# Focus/swap windows by direction
+super + ctrl + {Left,Down,Up,Right}
+	bspc node --{focus} {west,south,north,east}
+
+# Contract tiled space
+super + ctrl + {h,j,k,l}
+	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+
+# Focus parent/brother/first/second for preselection
+super + ctrl + {e,r,t,y}
+	bspc node --focus @{parent,brother,first,second}
+
+# Preselect the splitting area for next window on leaf/parent
+super + ctrl + {u,i,o,p}
+	bspc node --presel-dir \~{west,south,north,east}
+
+# Define splitting ratio for next window on leaf/parent
+super + ctrl + {_,shift +}{1-9}
+	bspc node {_,@/} --presel-ratio 0.{1-9}
+
+
+#################################################################
+# ALT KEYS
+#################################################################
+
+#Focus selected desktop
+alt + Tab
+	bspc desktop -f '^{1-9,10}'
+
+	#Focus selected desktop
+alt + shift + Tab
+	bspc desktop -f '^{1-9,10}'
+
+#Rotate desktop
+alt + space
+	bspc node @/ --rotate {90,-90}
+
+#################################################################
+# ALT + SHIFT KEYS
+#################################################################
+
+# Expand tiled space
+alt + shift + {h,j,k,l}
+	bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
+
+#################################################################
+# CTRL + ALT KEYS
+#################################################################
+
+# Focus next/previous window
+ctrl + alt + Left
+	bspc node --focus west
+
+# Focus next/previous window
+ctrl + alt + Right
+	bspc node --focus east
+
+# Focus Up window
+ctrl +alt + Up
+	bspc node --focus north
+
+# Focus Down window
+ctrl + alt + Down
+	bspc node --focus south
+
+
+
+## super & mouse scroll
+
+# Focused desktop window gap
+super + button{4,5}
+  bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 2 ))

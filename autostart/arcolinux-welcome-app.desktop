@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Arcolinux Welcome
+GenericName=Arcolinux Welcome
+X-GNOME-FullName=Arcolinux Welcome
+Comment=Welcome Application for Arcolinux Installs
+Exec=/usr/local/bin/arcolinux-welcome-app
+Icon=arcolinux-hello
+Terminal=false
+Type=Application
+Categories=GTK;Settings;Security;X-GNOME-Settings-Panel;X-GNOME-SystemSettings;X-Unity-Settings-Panel;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+Keywords=welcome;tool;
+StartupNotify=true
