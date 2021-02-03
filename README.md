@@ -17,8 +17,8 @@ This setup has taken a lot of time and effort to make but it was worth it in the
 
 ### <center>Screenshots</center>
 <p align="center">
-	<img width="60%" src="https://github.com/notmehul/dotfiles/blob/main/images/Screenshot_2021-02-03-42_1920x1080.png" />
-	<img width="60%" src="https://github.com/notmehul/dotfiles/blob/main/images/Screenshot_2021-02-03-29_1920x1080.png" />
-	<img width="60%" src="https://github.com/notmehul/dotfiles/blob/main/images/Screenshot_2021-02-03-43_1920x1080.png" />
+	<img width="80%" src="https://github.com/notmehul/dotfiles/blob/main/images/Screenshot_2021-02-03-42_1920x1080.png" />
+	<img width="80%" src="https://github.com/notmehul/dotfiles/blob/main/images/Screenshot_2021-02-03-29_1920x1080.png" />
+	<img width="80%" src="https://github.com/notmehul/dotfiles/blob/main/images/Screenshot_2021-02-03-43_1920x1080.png" />
 </p>
 
