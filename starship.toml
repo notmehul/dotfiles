@@ -1,0 +1,37 @@
+format = """
+[$hostname](green) in $directory$character
+"""
+
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = '[➜](bold red)'
+
+[username]
+show_always = true
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+format = "😺 [$hostname](bold yellow)"
+
+[c]
+format = "[$symbol($version )]($style)"
+symbol = " "
+
+[directory]
+read_only = " "
+
+[golang]
+symbol = " "
+format = "[$symbol($version )]($style)"
+
+[memory_usage]
+symbol = " "
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+symbol = " "
+
+[python]
+symbol = " "
+format = "[$symbol($version )]($style)"
