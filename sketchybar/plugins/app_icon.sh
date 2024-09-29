@@ -101,35 +101,11 @@ case "$1" in
   "Screenshot" | "Preview")
     RESULT=$ICON_PREVIEW
     ;;
-  "1Password")
+  "Passwords")
     RESULT=$ICON_PASSKEY
     ;;
-  "NordVPN")
-    RESULT=$ICON_VPN
-    ;;
-  "Progressive Downloaded" | "Transmission")
-    RESULT=$ICON_DOWNLOAD
-    ;;
-  "Airflow")
-    RESULT=$ICON_CAST
-    ;;
-  "Microsoft Excel")
-    RESULT=$ICON_TABLE
-    ;;
-  "Microsoft PowerPoint")
-    RESULT=$ICON_PRESENT
-    ;;
-  "OneDrive")
-    RESULT=$ICON_CLOUD
-    ;;
-  "Curve")
-    RESULT=$ICON_PEN
-    ;;
-  "Microsoft Remote Desktop" | "VMware Fusion" | "UTM")
-    RESULT=$ICON_REMOTEDESKTOP
-    ;;
   *)
-    RESULT="󰆍"
+    RESULT="󰧱"
     ;;
 esac
 

@@ -77,15 +77,6 @@ done
 sketchybar --add bracket spaces '/space\..*/'                      \
            --set         spaces background.color=$COLOR_BACKGROUND
 
-
-sketchybar --add item front-app left \
-  --set front-app \
-  script="$PLUGIN_DIR/front-app.sh" \
-  label.font.style="Bold" \
-  icon.padding_left=$PAD_LEFT \
-  label.padding_right=$PAD_RIGHT \
-  --subscribe front-app front_app_switched window_change
-
 ##### Adding Right Items #####
 
 # Some items refresh on a fixed cycle, e.g. the clock runs its script once
