@@ -18,6 +18,17 @@ brew bundle --file=Brewfile   # install all packages/casks/taps
 
 Then recreate the **secrets** (intentionally NOT in the repo — see below).
 
+## Maintenance
+
+```sh
+./maintenance.sh            # reclaim disk from regenerable caches (npm, uv, bun, brew, pods)
+./maintenance.sh --deep     # also clears re-downloadable caches (HuggingFace, Playwright, …)
+./maintenance.sh --dry-run  # preview, change nothing
+```
+
+See [`docs/changelog.md`](docs/changelog.md) for the full record of how this repo was
+set up, and [`docs/python.md`](docs/python.md) for the Python/uv workflow.
+
 ## What's tracked
 
 | Area | Path | Linked to |
@@ -26,6 +37,8 @@ Then recreate the **secrets** (intentionally NOT in the repo — see below).
 | Git | `git/config`, `git/ignore` | `~/.gitconfig` (also read via XDG) |
 | Packages | `Brewfile`, `packages.md` | — (run `brew bundle` / reinstall globals) |
 | Python | `uv/uv.toml` (uv manages Python — see `docs/python.md`) | in-place |
+| Scripts/docs | `install.sh`, `maintenance.sh`, `docs/` | — |
+| Shell tooling | fzf, atuin, bat, duf, zoxide — installed via Brewfile, wired in `zsh/zshrc` | — |
 | Window mgmt | `yabai/`, `skhd/`, `sketchybar/` | in-place (already under `~/.config`) |
 | Terminal/prompt | `kitty/`, `starship.toml` | in-place |
 | Editors | `cursor/settings.json`, `cursor/keybindings.json` | Cursor → `~/Library/Application Support/Cursor/User/` |
