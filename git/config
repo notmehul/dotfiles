@@ -1,0 +1,7 @@
+[user]
+	name = mehul srivastava
+	email = mehulsrivastava090801@gmail.com
+[http]
+	postBuffer = 157286400
+[safe]
+	directory = *

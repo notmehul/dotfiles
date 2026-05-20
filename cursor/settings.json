@@ -1,0 +1,62 @@
+{
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "python.defaultInterpreterPath": "/usr/local/bin/python3",
+    "security.workspace.trust.untrustedFiles": "open",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "window.zoomLevel": 3,
+    "editor.unicodeHighlight.invisibleCharacters": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "git.openRepositoryInParentFolders": "never",
+    "workbench.colorTheme": "Ayu Mirage Bordered",
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
+    },
+    "redhat.telemetry.enabled": false,
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "explorer.confirmDelete": false,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "git.confirmSync": false,
+    "files.autoSave": "afterDelay",
+    "explorer.confirmDragAndDrop": false,
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "editor.accessibilitySupport": "off",
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": true,
+    "cmake.showOptionsMovedNotification": false,
+    "editor.renderWhitespace": "all",
+    "workbench.editor.editorActionsLocation": "hidden",
+    "editor.fontFamily": "SF Mono, Menlo, Monaco, 'Courier New', monospace, Hack Nerd Font",
+    "workbench.productIconTheme": "sf-symbol-icons",
+    "editor.cursorStyle": "underline",
+    "editor.minimap.autohide": "mouseover",
+    "window.commandCenter": false,
+    "window.titleSeparator": " | ",
+    "workbench.sideBar.location": "right",
+    "git.enableSmartCommit": true,
+    "git.ignoreMissingGitWarning": true,
+    "diffEditor.maxComputationTime": 0,
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    },
+    "extensions.ignoreRecommendations": true,
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "cursor.composer.shouldChimeAfterChatFinishes": true,
+    "cursor.composer.usageSummaryDisplay": "always",
+    "editor.wordWrap": "on",
+    "editor.padding.top": 1,
+    "workbench.statusBar.visible": false
+}

@@ -1,0 +1,5 @@
+# uv global config — single source of truth for Python on this machine.
+# uv manages the interpreter itself; per-project versions go in each
+# project's .python-version (uv python pin). Default interpreter: 3.12.
+python-preference = "only-managed"   # never use system/brew python; always uv-managed
+python-downloads  = "automatic"      # fetch missing versions on demand

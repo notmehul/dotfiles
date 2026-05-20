@@ -1,0 +1,36 @@
+# API keys / secrets (gitignored, see ~/.config/.env.example)
+[ -f ~/.config/.env ] && source ~/.config/.env
+
+#aliases
+alias ls='eza -lah'
+alias colorscript="$HOME/Dev/Shell-Color-Scripts/colorscript.sh"
+alias ..='cd ..'
+alias ...='cd ../..'
+alias python='python3'
+
+# pretty stuf on opening
+[ -x ~/colorbars ] && ~/colorbars
+
+# starship prompt
+eval "$(starship init zsh)"
+
+MAC_SDK_PATH=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+CMAKE_OSX_SYSROOT=$MAC_SDK_PATH
+CMAKE_OSX_DEPLOYMENT_TARGET=13.3
+
+# node is provided by Homebrew (single source); nvm removed.
+export PATH="$HOME/.local/bin:$PATH"
+
+# Added by Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# LSP for claude code
+ENABLE_LSP_TOOL=1
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

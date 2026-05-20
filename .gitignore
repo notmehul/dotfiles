@@ -1,0 +1,52 @@
+# ============================================================
+#  ~/.config dotfiles — ignore rules
+#  Goal: track portable CONFIG only. Never track secrets,
+#  machine-local state, caches, or regenerable artifacts.
+# ============================================================
+
+# ---- Secrets (recreate per-device — see README.md) ----
+.env
+rclone/rclone.conf
+gh/hosts.yml
+opencode/antigravity-accounts.json
+opencode/antigravity-signature-cache.json
+opencode/antigravity-logs/
+**/.claude/settings.local.json
+
+# ---- OS / editor noise ----
+.DS_Store
+*.swp
+*.swo
+
+# ---- Dependencies / build artifacts ----
+node_modules/
+**/node_modules/
+**/.ruff_cache/
+
+# ---- Raycast: installed extension binaries + local AI state (not portable) ----
+raycast/extensions/
+raycast/ai/
+
+# ---- Zed: local databases, embeddings, scratch files ----
+zed/embeddings/
+zed/conversations/
+zed/prompts/
+zed/.tmp*
+
+# ---- fish: auto-generated universal variables (runtime/machine state) ----
+fish/fish_variables
+
+# ---- update-notifier / configstore runtime state ----
+configstore/
+
+# ---- Spicetify: removed, no longer used ----
+spicetify/
+
+# ---- install.sh backups of replaced dotfiles ----
+.install-backups/
+
+# ---- AI tool config that contains inline secrets (kept local-only) ----
+# codex config.toml has MCP API keys; gemini settings.json has a Notion token.
+codex/config.toml
+gemini/settings.json
+zed/settings.json
