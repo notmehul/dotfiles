@@ -5,3 +5,44 @@
 	postBuffer = 157286400
 [safe]
 	directory = *
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+	default = current
+	followTags = true
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+	pruneTags = true
+[rebase]
+	autoStash = true
+	updateRefs = true
+[merge]
+	conflictstyle = zdiff3
+[diff]
+	algorithm = histogram
+	colorMoved = default
+	mnemonicPrefix = true
+	renames = true
+[rerere]
+	enabled = true
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[column]
+	ui = auto
+[help]
+	autocorrect = prompt
+[alias]
+	co = checkout
+	sw = switch
+	st = status -sb
+	br = branch
+	last = log -1 HEAD --stat
+	lg = log --oneline --graph --decorate -20
+	unstage = restore --staged
+	amend = commit --amend --no-edit
+	wip = "!git add -A && git commit -m wip"

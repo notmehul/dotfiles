@@ -34,3 +34,9 @@ ENABLE_LSP_TOOL=1
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# modern CLI tools (guarded so a missing tool never breaks the shell)
+command -v bat   >/dev/null && { alias cat='bat --style=plain --paging=never'; export MANPAGER="sh -c 'col -bx | bat -l man -p'"; }
+command -v duf   >/dev/null && alias df='duf'
+command -v fzf   >/dev/null && source <(fzf --zsh)          # Ctrl-T files, Alt-C dirs
+command -v atuin >/dev/null && eval "$(atuin init zsh)"     # Ctrl-R history (loads after fzf)
