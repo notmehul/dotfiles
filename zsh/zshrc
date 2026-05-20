@@ -40,3 +40,6 @@ command -v bat   >/dev/null && { alias cat='bat --style=plain --paging=never'; e
 command -v duf   >/dev/null && alias df='duf'
 command -v fzf   >/dev/null && source <(fzf --zsh)          # Ctrl-T files, Alt-C dirs
 command -v atuin >/dev/null && eval "$(atuin init zsh)"     # Ctrl-R history (loads after fzf)
+
+# zoxide: replaces `cd` so it auto-learns dirs; `cd <partial>` jumps, `cdi` = fzf picker
+command -v zoxide >/dev/null && eval "$(zoxide init zsh --cmd cd)"
