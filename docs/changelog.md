@@ -55,6 +55,15 @@ this file explains *what changed and why*.
   auto-learns directories, and `cdi` opens an fzf picker. Database seeded with existing
   project dirs (the empty DB was why it felt broken before).
 
+## 7. Fish-like zsh
+- Added `zsh-autosuggestions` (inline history suggestions, → to accept),
+  `zsh-fast-syntax-highlighting` (command coloring, sourced last), and
+  `zsh-completions` — all via Brewfile, sourced in `zsh/zshrc` (no plugin manager).
+- Enabled the completion system: `compinit -u` (the `-u` trusts Homebrew's
+  group-writable `/opt/homebrew/share`, the standard fix for the "insecure
+  directories" warning) + two zstyles (menu select, case-insensitive matching).
+- Startup stays ~0.6 s (no measurable cost).
+
 ## Known follow-ups
 - **Agent skills** are triplicated and drifted across `opencode/skill`, `~/.claude/skills`,
   `~/.codex/skills` — owner is reviewing which version wins per skill.

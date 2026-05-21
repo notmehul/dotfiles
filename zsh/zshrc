@@ -35,6 +35,13 @@ ENABLE_LSP_TOOL=1
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# completions + autosuggestions (fish-like)
+fpath=(/opt/homebrew/share/zsh-completions /opt/homebrew/share/zsh/site-functions $fpath)
+autoload -Uz compinit && compinit -u   # -u: trust Homebrew's group-writable share dir
+zstyle ':completion:*' menu select                        # arrow-key menu
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' # case-insensitive
+[ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # modern CLI tools (guarded so a missing tool never breaks the shell)
 command -v bat   >/dev/null && { alias cat='bat --style=plain --paging=never'; export MANPAGER="sh -c 'col -bx | bat -l man -p'"; }
 command -v duf   >/dev/null && alias df='duf'
@@ -43,3 +50,6 @@ command -v atuin >/dev/null && eval "$(atuin init zsh)"     # Ctrl-R history (lo
 
 # zoxide: replaces `cd` so it auto-learns dirs; `cd <partial>` jumps, `cdi` = fzf picker
 command -v zoxide >/dev/null && eval "$(zoxide init zsh --cmd cd)"
+
+# syntax highlighting — must be sourced last
+[ -f /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ] && source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh

@@ -38,7 +38,7 @@ set up, and [`docs/python.md`](docs/python.md) for the Python/uv workflow.
 | Packages | `Brewfile`, `packages.md` | — (run `brew bundle` / reinstall globals) |
 | Python | `uv/uv.toml` (uv manages Python — see `docs/python.md`) | in-place |
 | Scripts/docs | `install.sh`, `maintenance.sh`, `docs/` | — |
-| Shell tooling | fzf, atuin, bat, duf, zoxide — installed via Brewfile, wired in `zsh/zshrc` | — |
+| Shell tooling | fzf, atuin, bat, duf, zoxide + zsh-autosuggestions/fast-syntax-highlighting/completions — via Brewfile, wired in `zsh/zshrc` | — |
 | Window mgmt | `yabai/`, `skhd/`, `sketchybar/` | in-place (already under `~/.config`) |
 | Terminal/prompt | `kitty/`, `starship.toml` | in-place |
 | Editors | `cursor/settings.json`, `cursor/keybindings.json` | Cursor → `~/Library/Application Support/Cursor/User/` |
@@ -102,4 +102,5 @@ machine-specific state — recreate or hand-edit them per machine:
 
 Moving to **nix-darwin + home-manager**, which will replace `install.sh`'s symlinking
 with declarative `home.file` / `xdg.configFile` entries pointing at these same files.
-The flake lives in `nix/`. The flat layout here is deliberately home-manager-friendly.
+The old experimental flake was removed; the flake will be rebuilt from scratch. The flat
+layout here is deliberately home-manager-friendly.
