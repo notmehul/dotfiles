@@ -27,6 +27,15 @@ command -v bun  >/dev/null && { step "bun cache";       run "bun pm cache rm"; }
 command -v brew >/dev/null && { step "brew cleanup";    run "brew cleanup -s"; run "brew autoremove"; }
 command -v pod  >/dev/null && { step "cocoapods cache"; run "pod cache clean --all"; }
 
+# brew cleanup prunes old versioned kegs; if a dependency was upgraded but its
+# dependent wasn't rebuilt, that dependent now points at a deleted .dylib and will
+# abort with a dyld error (e.g. node vs llhttp). Surface it instead of finding out later.
+if command -v brew >/dev/null; then
+  step "brew linkage check"
+  broken=$(brew linkage --test $(brew leaves) 2>/dev/null | grep -iE "missing|broken" || true)
+  [ -n "$broken" ] && printf '    ⚠ broken linkage — reinstall the affected formula(e):\n%s\n' "$broken"
+fi
+
 # --- deep tier: bigger caches that RE-DOWNLOAD on next use ---
 if [ "$DEEP" = 1 ]; then
   echo "-- deep (re-downloads on next use) --"

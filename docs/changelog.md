@@ -45,7 +45,10 @@ this file explains *what changed and why*.
 
 ## 6. Disk, shell tools, git, zoxide
 - **~29 GB reclaimed** from regenerable caches (npm 17 GB, uv, HuggingFace, Spotify, brew).
-  Repeatable via [`maintenance.sh`](../maintenance.sh).
+  Repeatable via [`maintenance.sh`](../maintenance.sh), which also runs a
+  `brew linkage` check after cleanup — pruning old kegs can leave a dependent
+  pointing at a deleted `.dylib` (e.g. node vs llhttp); the check surfaces it
+  so you `brew reinstall` the formula instead of hitting a `dyld` abort later.
 - **CLI tools** added to the Brewfile + wired into `zshrc` (guarded): `fzf` (Ctrl-T/Alt-C),
   `atuin` (Ctrl-R history), `bat` (cat/man pager), `duf` (df).
 - **git/config** modernized: `push.autoSetupRemote`, `pull.rebase`, `fetch.prune`,
