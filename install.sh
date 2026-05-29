@@ -51,6 +51,26 @@ link "$CFG/codex/AGENTS.md"     "$HOME/.codex/AGENTS.md"
 link "$CFG/cursor/settings.json"     "$CURSOR/settings.json"
 link "$CFG/cursor/keybindings.json"  "$CURSOR/keybindings.json"
 
+# Agent skills: the canonical pool is its own repo at ~/.agents/skills, read
+# natively by Codex and OpenCode. Claude only reads ~/.claude/skills, so symlink
+# each skill there. Idempotent; also covers skills the `skills` CLI installs
+# globally without creating the Claude symlink (vercel-labs/skills#851).
+AGENTS_SKILLS="$HOME/.agents/skills"
+if [ -d "$AGENTS_SKILLS" ]; then
+  say "Linking agent skills into ~/.claude/skills ..."
+  run "mkdir -p \"$HOME/.claude/skills\""
+  for s in "$AGENTS_SKILLS"/*/; do
+    name="$(basename "$s")"; dest="$HOME/.claude/skills/$name"
+    if [ -L "$dest" ] && [ "$(readlink "$dest")" = "../../.agents/skills/$name" ]; then
+      say "✓ skill $name"; continue
+    fi
+    run "ln -sfn \"../../.agents/skills/$name\" \"$dest\""
+    say "→ skill $name"
+  done
+else
+  say "(skip skills: ~/.agents not cloned — git clone it for shared agent skills)"
+fi
+
 say ""
 say "Done. Backups (if any) in: $BACKUP"
 say "Next: install packages with  ->  brew bundle --file=$CFG/Brewfile"

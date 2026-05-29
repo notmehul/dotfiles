@@ -67,9 +67,22 @@ this file explains *what changed and why*.
   directories" warning) + two zstyles (menu select, case-insensitive matching).
 - Startup stays ~0.6 s (no measurable cost).
 
+## 8. Agent skills → one canonical pool
+- Skills had **triplicated and drifted** across `opencode/skill/`, `~/.claude/skills/`,
+  and `~/.codex/skills/`. Research confirmed the ecosystem converged on the
+  [Agent Skills standard](https://agentskills.io): **Codex and OpenCode read
+  `~/.agents/skills` natively**, and Claude Code follows symlinks placed in
+  `~/.claude/skills`. The old per-tool dirs are no longer in any tool's search path.
+- Consolidated all 12 authored skills into **`~/.agents/skills`** (its own git repo),
+  picking the best version per skill (OpenCode's de-Clauded/expanded copies won
+  everywhere except `skill-creator`, where Codex's eval-driven version won). Wording
+  kept tool-neutral for portability.
+- `install.sh` symlinks each pooled skill into `~/.claude/skills` (also a safety net for
+  the `skills` CLI bug where global installs skip the Claude symlink). Removed the legacy
+  `opencode/skill/` (16 files) and `~/.codex/skills/` authored copies. Third-party skills
+  (ui-ux-pro-max, find-skills, remotion, cua-driver) stay CLI/app-managed and gitignored.
+
 ## Known follow-ups
-- **Agent skills** are triplicated and drifted across `opencode/skill`, `~/.claude/skills`,
-  `~/.codex/skills` — owner is reviewing which version wins per skill.
 - **Framework Python** removal (sudo step) when ready.
 - Rotate any API keys that were previously sitting in plaintext, as good hygiene.
 - Optional, not done: direnv+uv auto-venv; `fd`/`dust`/`delta`; macOS `defaults` tweaks.

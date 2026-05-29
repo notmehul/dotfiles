@@ -11,9 +11,10 @@ the live config updates.
 
 ```sh
 git clone https://github.com/notmehul/dotfiles.git ~/.config
+git clone <your-agents-repo> ~/.agents   # agent skills (see ~/.agents/README.md)
 cd ~/.config
 brew bundle --file=Brewfile   # install all packages/casks/taps
-./install.sh                  # symlink configs into place (backs up anything it replaces)
+./install.sh                  # symlink configs + agent skills into place (backs up anything it replaces)
 ```
 
 Then recreate the **secrets** (intentionally NOT in the repo — see below).
@@ -43,6 +44,7 @@ set up, and [`docs/python.md`](docs/python.md) for the Python/uv workflow.
 | Terminal/prompt | `kitty/`, `starship.toml` | in-place |
 | Editors | `cursor/settings.json`, `cursor/keybindings.json` | Cursor → `~/Library/Application Support/Cursor/User/` |
 | AI tools | `claude/{CLAUDE.md,settings.json}`, `codex/AGENTS.md` | `~/.claude/`, `~/.codex/` |
+| Agent skills | `~/.agents/skills/` (separate repo — see `~/.agents/README.md`) | Codex/OpenCode read natively; `install.sh` symlinks into `~/.claude/skills` |
 | Misc | `gh/config.yml`, `opencode/`, `openspec/`, `htop/`, `neofetch/`, `cmux/` | in-place |
 
 ## Secrets — recreate per device (never committed)
@@ -88,10 +90,10 @@ machine-specific state — recreate or hand-edit them per machine:
 
 - **Cursor atomic-save caveat:** Cursor may replace the symlinked `settings.json` with a
   real file on save. If your changes stop syncing to the repo, re-run `./install.sh`.
-- **Skill duplication:** the same skills live in `opencode/skill/`, `~/.claude/skills/`,
-  and `~/.codex/skills/`, but they've **drifted** (per-tool edits). Treated as intentional;
-  cruft (`__pycache__`, `.DS_Store`, packaged `dist/`) cleaned out. Collapse to a canonical
-  copy + symlinks only after deciding which version wins per skill.
+- **Agent skills:** consolidated to a single canonical pool at **`~/.agents/skills`** (its
+  own git repo), read natively by Codex and OpenCode and symlinked into `~/.claude/skills`
+  by `install.sh`. The old drifted per-tool copies (`opencode/skill/`, `~/.codex/skills/`)
+  are gone. See `~/.agents/README.md` for the layout and how to reproduce third-party skills.
 - **Python:** consolidated onto uv (3.12 default) — see `docs/python.md`. One step left:
   uninstall the python.org Framework once its old tools are fully migrated (needs `sudo`).
 - **Node:** consolidated onto Homebrew node (nvm removed, ~2.1 GB freed); globals reinstalled.
