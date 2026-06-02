@@ -1,0 +1,11 @@
+{
+  "version": "1",
+  "environments": {
+    "prod": {
+      "6193a46e-d48f-4e79-a950-a0c4247f4785": {
+        "id": "6193a46e-d48f-4e79-a950-a0c4247f4785",
+        "name": "Biome"
+      }
+    }
+  }
+}

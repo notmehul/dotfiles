@@ -58,5 +58,6 @@
     "cursor.composer.usageSummaryDisplay": "always",
     "editor.wordWrap": "on",
     "editor.padding.top": 1,
-    "workbench.statusBar.visible": false
+    "workbench.statusBar.visible": false,
+    "cursor.composer.conversationDensity": "compact-ungrouped"
 }
