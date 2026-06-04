@@ -16,7 +16,7 @@ add_space_item() {
     background.corner_radius=10 \
     background.height=20 \
     label.color=$FG_DIM \
-    icon.color=$FG_DIM \
+    icon.color=$FG_TEXT \
     display=$display \
     label.font="sketchybar-app-font:Regular:12.0" \
     icon.font="SF Pro:Semibold:12.0" \
@@ -26,9 +26,8 @@ add_space_item() {
 }
 
 # Updates a space's app icons and category color.
-# Pill is always visible (consistent with right-side items).
-# Focus: both number and app strip vivid in category color.
-# Unfocused: app strip colored, number dimmed — you always know what's in each space.
+# The space NUMBER stays white in every state (it's a non-app status glyph); the app
+# strip carries the category color. Focus is shown by the pill background toggling.
 update_space() {
   sid=$1
   is_focused=$2
@@ -46,13 +45,13 @@ update_space() {
       background.drawing=on \
       label="${icon_strip:-}" \
       label.color="$space_color" \
-      icon.color="$space_color"
+      icon.color=$FG_TEXT
   else
     sketchybar --set space.$sid \
       background.drawing=off \
       label="${icon_strip:-}" \
       label.color="$space_color" \
-      icon.color=$FG_DIM
+      icon.color=$FG_TEXT
   fi
 }
 

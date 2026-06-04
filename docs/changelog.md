@@ -82,6 +82,32 @@ this file explains *what changed and why*.
   `opencode/skill/` (16 files) and `~/.codex/skills/` authored copies. Third-party skills
   (ui-ux-pro-max, find-skills, remotion, cua-driver) stay CLI/app-managed and gitignored.
 
+## 9. Perceptual color normalization (The Dark Side accents)
+- The shared accent palette (purple/blue/amber/pink/etc.) had been copied as **raw
+  syntax hues** into `sketchybar/colors.sh`, `cmux/cmux.json`, and `zed/settings.json`.
+  Those hues were never iso-luminant: measured in OKLab they spanned **L 0.52 (purple)
+  to 0.77 (amber)**, so a focused "dev" space looked ~half as bright as a "media" space,
+  and pure-white (`#ffffff`, L 1.0) status text outshone every icon. The unevenness was
+  baked into the colors, not an opacity/overlay artifact.
+- Normalized all eight accents to a single **OKLab L≈0.70** (vivid variant: each hue
+  pinned to the max chroma it holds at that lightness, hue preserved), and dropped the
+  neutral foreground from `#ffffff` to a gray at the same L (`#9e9e9e`) — softer for the
+  GeistMono label font while still **~7–8:1 WCAG contrast** on the bar (AAA). Now every
+  glyph on the bar reads at one intensity. Conversion math: sRGB→OKLab, fix L, binary-
+  search max in-gamut chroma per hue.
+- Kept the same hexes in sync across the files (`zed/settings.json` gitignored, so it
+  changed on disk only; `starship.toml` prompt accents synced too). Pre-existing
+  terminal-ANSI colors (`Aqua`/`Teal` `#7287fd`, `Red` `#d20f39`, yellow `#e5c07b`)
+  were left as-is — they belong to the kitty/ghostty ANSI palette, where intentional
+  luminance variation is correct.
+- **Follow-up — sketchybar runs hotter (L≈0.75, not 0.70).** On the actual bar the
+  normalized colors read dull because the bar background is very translucent
+  (`0x44000000` + 30px blur) so the desktop bleeds through and mutes them, unlike the
+  more-opaque editor/terminal (`#000000B3`). So `sketchybar/colors.sh` alone was bumped
+  to **OKLab L≈0.77** with chroma pushed near the gamut edge (×0.96) — deliberately
+  brighter than zed/cmux/starship so it *looks* equally vivid. These hexes are now
+  intentionally NOT in sync with the others; don't re-flatten them.
+
 ## Known follow-ups
 - **Framework Python** removal (sudo step) when ready.
 - Rotate any API keys that were previously sitting in plaintext, as good hygiene.

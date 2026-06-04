@@ -2,7 +2,7 @@
 
 format = """
 [╭─](bold #7f848e)\
-[ $hostname ](bold #EA76CB)\
+[ $hostname ](bold #f949d2)\
 [  ](bold #7f848e)\
 $directory\
 $git_branch\
@@ -15,26 +15,26 @@ $character"""
 add_newline = false
 
 [character]
-success_symbol = '[❯](bold #40a02b)'
-error_symbol = '[❯](bold #DC143C)'
+success_symbol = '[❯](bold #43bc25)'
+error_symbol = '[❯](bold #f9686f)'
 
 [hostname]
 ssh_only = false
 format = '[$hostname]($style)'
-style = 'bold #EA76CB'
+style = 'bold #f949d2'
 disabled = false
 
 [directory]
 style = 'bold #7287fd'
 read_only = ' 󰌾'
-read_only_style = '#DC143C'
+read_only_style = '#f9686f'
 truncation_length = 3
 truncate_to_repo = true
 format = '[$path]($style)[$read_only]($read_only_style) '
 
 [git_branch]
 symbol = ' '
-style = 'bold #7725EE'
+style = 'bold #a388f9'
 format = 'on [$symbol$branch]($style) '
 
 [git_status]
@@ -53,12 +53,12 @@ deleted = '✘${count}'
 
 [nodejs]
 symbol = ' '
-style = 'bold #40a02b'
+style = 'bold #43bc25'
 format = '[$symbol($version )]($style)'
 
 [bun]
 symbol = ' '
-style = 'bold #40a02b'
+style = 'bold #43bc25'
 format = '[$symbol]($style) '
 
 [python]
@@ -68,7 +68,7 @@ format = '[$symbol($version )]($style)'
 
 [rust]
 symbol = ' '
-style = 'bold #EA76CB'
+style = 'bold #f949d2'
 format = '[$symbol($version )]($style)'
 
 [golang]

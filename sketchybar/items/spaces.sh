@@ -26,7 +26,7 @@ for sid in $(echo "$spaces_info" | jq -r 'sort_by(.index) | .[].index'); do
     background.corner_radius=10 \
     background.height=20 \
     label.color=$FG_DIM \
-    icon.color=$FG_DIM \
+    icon.color=$FG_TEXT \
     display=$display \
     label.font="sketchybar-app-font:Regular:12.0" \
     icon.font="SF Pro:Semibold:12.0" \

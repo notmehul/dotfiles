@@ -19,9 +19,9 @@ sketchybar --bar height=39 \
 
 
 sketchybar --default icon.font="$ICON_FONT" \
-  icon.color=$FG \
+  icon.color=$FG_TEXT \
   label.font="$LABEL_FONT" \
-  label.color=$FG \
+  label.color=$FG_TEXT \
   background.color=$PILL_BG \
   background.corner_radius=10 \
   background.height=20 \
