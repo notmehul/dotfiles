@@ -1,0 +1,37 @@
+# font
+font-family = GeistMono Nerd Font
+font-size = 14
+
+# cursor
+cursor-style = bar
+cursor-color = #00e5ff
+cursor-style-blink = false
+
+# background
+background = #000000
+background-opacity = 0.7
+background-blur-radius = 30
+
+# window
+window-padding-x = 30
+window-padding-y = 30
+
+# colors — tokyo night cyberpunk
+foreground = #ffffff
+
+palette = 0=#1a1b26
+palette = 1=#ff003c
+palette = 2=#00ff9f
+palette = 3=#ffd700
+palette = 4=#0066ff
+palette = 5=#cc00ff
+palette = 6=#00ffff
+palette = 7=#c0caf5
+palette = 8=#414868
+palette = 9=#ff4daa
+palette = 10=#39ffb8
+palette = 11=#ffff66
+palette = 12=#4d99ff
+palette = 13=#dd88ff
+palette = 14=#80f0ff
+palette = 15=#ffffff

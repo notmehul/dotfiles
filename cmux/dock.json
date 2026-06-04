@@ -1,0 +1,10 @@
+{
+  "controls": [
+    {
+      "id": "feed",
+      "title": "Feed",
+      "command": "cmux feed tui",
+      "height": 400
+    }
+  ]
+}

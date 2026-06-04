@@ -53,3 +53,9 @@ command -v zoxide >/dev/null && eval "$(zoxide init zsh --cmd cd)"
 
 # syntax highlighting — must be sourced last
 [ -f /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ] && source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+# cmux: open URLs in the embedded browser
+export BROWSER="cmux browser open"
+
+# cmux: ensure agents can always find the socket
+export CMUX_SOCKET_PATH="$HOME/.config/cmux/cmux.sock"

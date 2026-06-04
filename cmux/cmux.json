@@ -8,27 +8,27 @@
   // cmux creates this template on launch when ~/.config/cmux/cmux.json is missing.
   // Legacy settings.json files are read only as fallback for keys not present here.
 
-  //   "app" : {
-  //     "openSupportedFilesInCmux" : true,
-  //     "warnBeforeQuit" : true,
-  //     "newWorkspacePlacement" : "afterCurrent",
-  //     "appearance" : "system",
-  //     "preferredEditor" : "",
-  //     "commandPaletteSearchesAllSurfaces" : false,
-  //     "language" : "system",
-  //     "menuBarOnly" : false,
-  //     "reorderOnNotification" : true,
-  //     "focusPaneOnFirstClick" : false,
-  //     "openMarkdownInCmuxViewer" : false,
-  //     "warnBeforeClosingTab" : true,
-  //     "renameSelectsExistingName" : true,
-  //     "appIcon" : "automatic",
-  //     "minimalMode" : false,
-  //     "iMessageMode" : false,
-  //     "workspaceInheritWorkingDirectory" : true,
-  //     "sendAnonymousTelemetry" : true,
-  //     "keepWorkspaceOpenWhenClosingLastSurface" : false
-  //   },
+  "app" : {
+    "appearance" : "dark",
+    "minimalMode" : true,
+    "commandPaletteSearchesAllSurfaces" : true,
+    "reorderOnNotification" : true
+  },
+
+  "terminal" : {
+    "agentHibernation" : {
+      "enabled" : true,
+      "idleSeconds" : 1800,
+      "maxLiveTerminals" : 8
+    }
+  },
+
+  "notifications" : {
+    "dockBadge" : true,
+    "paneFlash" : true,
+    "unreadPaneRing" : true,
+    "showInMenuBar" : true
+  },
 
   //   "terminal" : {
   //     "showScrollBar" : true,
@@ -49,22 +49,10 @@
   //     "command" : ""
   //   },
 
-  //   "sidebar" : {
-  //     "showPorts" : true,
-  //     "showProgress" : true,
-  //     "branchLayout" : "vertical",
-  //     "hideAllDetails" : false,
-  //     "showCustomMetadata" : true,
-  //     "showLog" : true,
-  //     "showSSH" : true,
-  //     "makePullRequestsClickable" : true,
-  //     "showWorkspaceDescription" : true,
-  //     "showPullRequests" : true,
-  //     "showNotificationMessage" : true,
-  //     "showBranchDirectory" : true,
-  //     "openPullRequestLinksInCmuxBrowser" : true,
-  //     "openPortLinksInCmuxBrowser" : true
-  //   },
+  "sidebar" : {
+    "openPullRequestLinksInCmuxBrowser" : true,
+    "openPortLinksInCmuxBrowser" : true
+  },
 
   //   "workspaceColors" : {
   //     "selectionColor" : null,
@@ -90,48 +78,31 @@
   //     "notificationBadgeColor" : null
   //   },
 
-  //   "sidebarAppearance" : {
-  //     "tintColor" : "#000000",
-  //     "darkModeTintColor" : null,
-  //     "lightModeTintColor" : null,
-  //     "matchTerminalBackground" : false,
-  //     "tintOpacity" : 0.17999999999999999
-  //   },
+  "sidebarAppearance" : {
+    "tintColor" : "#000000",
+    "darkModeTintColor" : "#000000",
+    "matchTerminalBackground" : true,
+    "tintOpacity" : 0.18
+  },
 
-  //   "automation" : {
-  //     "portBase" : 9100,
-  //     "claudeCodeIntegration" : true,
-  //     "claudeBinaryPath" : "",
-  //     "socketControlMode" : "cmuxOnly",
-  //     "socketPassword" : "",
-  //     "cursorIntegration" : true,
-  //     "geminiIntegration" : true,
-  //     "portRange" : 10
-  //   },
+  "automation" : {
+    "claudeCodeIntegration" : true,
+    "socketControlMode" : "cmuxOnly"
+  },
 
-  //   "browser" : {
-  //     "reactGrabVersion" : "0.1.29",
-  //     "theme" : "system",
-  //     "showSearchSuggestions" : true,
-  //     "interceptTerminalOpenCommandInCmuxBrowser" : true,
-  //     "hostsToOpenInEmbeddedBrowser" : [
-  // 
-  //     ],
-  //     "showImportHintOnBlankTabs" : true,
-  //     "urlsToAlwaysOpenExternally" : [
-  // 
-  //     ],
-  //     "openTerminalLinksInCmuxBrowser" : true,
-  //     "defaultSearchEngine" : "google",
-  //     "insecureHttpHostsAllowedInEmbeddedBrowser" : [
-  //       "localhost",
-  //       "*.localhost",
-  //       "127.0.0.1",
-  //       "::1",
-  //       "0.0.0.0",
-  //       "*.localtest.me"
-  //     ]
-  //   },
+  "browser" : {
+    "theme" : "dark",
+    "interceptTerminalOpenCommandInCmuxBrowser" : true,
+    "openTerminalLinksInCmuxBrowser" : true,
+    "insecureHttpHostsAllowedInEmbeddedBrowser" : [
+      "localhost",
+      "*.localhost",
+      "127.0.0.1",
+      "::1",
+      "0.0.0.0",
+      "*.localtest.me"
+    ]
+  },
 
   //   "shortcuts" : {
   //     "bindings" : {

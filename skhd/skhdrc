@@ -87,6 +87,9 @@ alt - 6 : yabai -m space --focus 6
 alt - 7 : yabai -m space --focus 7
 alt - 8 : yabai -m space --focus 8
 
-cmd - return : open -na kitty
+cmd - return : open -na /Applications/cmux.app
 
-alt - f : open ~ 
+# cmux: focus cmux and open Feed panel in right sidebar
+cmd + shift - return : osascript -e 'tell application "cmux" to activate' -e 'delay 0.05' -e 'tell application "System Events" to keystroke "e" using {command down, shift down}'
+
+alt - f : open ~
