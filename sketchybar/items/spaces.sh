@@ -21,9 +21,12 @@ for sid in $(echo "$spaces_info" | jq -r 'sort_by(.index) | .[].index'); do
   sketchybar --add space space.$sid left \
     --set space.$sid space=$sid \
     icon=$sid \
-    background.color=$TRANSPARENT \
-    label.color=$ACCENT_COLOR \
-    icon.color=$ACCENT_COLOR \
+    background.color=$PILL_BG \
+    background.drawing=off \
+    background.corner_radius=10 \
+    background.height=20 \
+    label.color=$FG_DIM \
+    icon.color=$FG_DIM \
     display=$display \
     label.font="sketchybar-app-font:Regular:12.0" \
     icon.font="SF Pro:Semibold:12.0" \
@@ -45,14 +48,9 @@ for sid in $(echo "$spaces_info" | jq -r 'sort_by(.index) | .[].index'); do
   prev="space.$sid"
 done
 
-# Highlight focused space
-focused_space=$(echo "$spaces_info" | jq -r '.[] | select(.["has-focus"] == true) | .index')
-if [ -n "$focused_space" ]; then
-  sketchybar --set space.$focused_space background.drawing=on \
-    background.color=$ACCENT_COLOR \
-    label.color=$ITEM_COLOR \
-    icon.color=$ITEM_COLOR
-fi
-
 # Save initial space IDs so the plugin can diff on space_change
 echo "$spaces_info" | jq -r '.[].index' | sort -n > "$SPACE_CACHE"
+
+# Trigger the plugin immediately so category colors are applied at startup,
+# not only after the first space/window change event
+sketchybar --trigger space_change

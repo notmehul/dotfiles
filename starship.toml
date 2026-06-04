@@ -1,44 +1,44 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
 format = """
-[╭─](bold #414868)\
-[ $hostname ](bold #ff2d6b)\
-[  ](bold #414868)\
+[╭─](bold #7f848e)\
+[ $hostname ](bold #EA76CB)\
+[  ](bold #7f848e)\
 $directory\
 $git_branch\
 $git_status\
 $nodejs$python$rust$golang$bun\
 $line_break\
-[╰─](bold #414868)\
+[╰─](bold #7f848e)\
 $character"""
 
 add_newline = false
 
 [character]
-success_symbol = '[❯](bold #00ff9f)'
-error_symbol = '[❯](bold #ff2d6b)'
+success_symbol = '[❯](bold #40a02b)'
+error_symbol = '[❯](bold #DC143C)'
 
 [hostname]
 ssh_only = false
 format = '[$hostname]($style)'
-style = 'bold #ff2d6b'
+style = 'bold #EA76CB'
 disabled = false
 
 [directory]
-style = 'bold #00e5ff'
+style = 'bold #7287fd'
 read_only = ' 󰌾'
-read_only_style = '#ff2d6b'
+read_only_style = '#DC143C'
 truncation_length = 3
 truncate_to_repo = true
 format = '[$path]($style)[$read_only]($read_only_style) '
 
 [git_branch]
 symbol = ' '
-style = 'bold #bd00ff'
+style = 'bold #7725EE'
 format = 'on [$symbol$branch]($style) '
 
 [git_status]
-style = '#ffd700'
+style = '#e5c07b'
 format = '([$all_status$ahead_behind]($style) )'
 conflicted = '⚡'
 ahead = '⇡${count}'
@@ -53,25 +53,25 @@ deleted = '✘${count}'
 
 [nodejs]
 symbol = ' '
-style = 'bold #00ff9f'
+style = 'bold #40a02b'
 format = '[$symbol($version )]($style)'
 
 [bun]
 symbol = ' '
-style = 'bold #00ff9f'
+style = 'bold #40a02b'
 format = '[$symbol]($style) '
 
 [python]
 symbol = ' '
-style = 'bold #ffd700'
+style = 'bold #e5c07b'
 format = '[$symbol($version )]($style)'
 
 [rust]
 symbol = ' '
-style = 'bold #ff6b9d'
+style = 'bold #EA76CB'
 format = '[$symbol($version )]($style)'
 
 [golang]
 symbol = ' '
-style = 'bold #62eeff'
+style = 'bold #7287fd'
 format = '[$symbol($version )]($style)'

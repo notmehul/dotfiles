@@ -11,9 +11,12 @@ add_space_item() {
   sketchybar --add space space.$sid left \
     --set space.$sid space=$sid \
     icon=$sid \
-    background.color=$TRANSPARENT \
-    label.color=$ACCENT_COLOR \
-    icon.color=$ACCENT_COLOR \
+    background.color=$PILL_BG \
+    background.drawing=off \
+    background.corner_radius=10 \
+    background.height=20 \
+    label.color=$FG_DIM \
+    icon.color=$FG_DIM \
     display=$display \
     label.font="sketchybar-app-font:Regular:12.0" \
     icon.font="SF Pro:Semibold:12.0" \
@@ -22,34 +25,35 @@ add_space_item() {
     click_script="$CONFIG_DIR/plugins/space_click.sh $sid"
 }
 
-update_workspace_appearance() {
+# Updates a space's app icons and category color.
+# Pill is always visible (consistent with right-side items).
+# Focus: both number and app strip vivid in category color.
+# Unfocused: app strip colored, number dimmed — you always know what's in each space.
+update_space() {
   sid=$1
   is_focused=$2
 
-  if [ "$is_focused" = "true" ]; then
-    sketchybar --set space.$sid background.drawing=on \
-      background.color=$ACCENT_COLOR \
-      label.color=$ITEM_COLOR \
-      icon.color=$ITEM_COLOR
-  else
-    sketchybar --set space.$sid background.drawing=off \
-      label.color=$ACCENT_COLOR \
-      icon.color=$ACCENT_COLOR
-  fi
-}
+  windows=$(yabai -m query --windows --space $sid 2>/dev/null)
+  first_app=$(echo "$windows" | jq -r '[.[] | select(.["is-minimized"] == false and .["is-hidden"] == false)] | .[0].app // ""')
+  space_color=$([ -n "$first_app" ] && "$CONFIG_DIR/plugins/app_color.sh" "$first_app" || echo "$FG_DIM")
 
-update_icons() {
-  sid=$1
-
-  icon_strip=$(yabai -m query --windows --space $sid | jq -r '.[] | select(.["is-minimized"] == false and .["is-hidden"] == false) | .app' | awk '!seen[$0]++' | head -5 | while read -r app; do
+  icon_strip=$(echo "$windows" | jq -r '.[] | select(.["is-minimized"] == false and .["is-hidden"] == false) | .app' | awk '!seen[$0]++' | head -5 | while read -r app; do
     printf " %s" "$($CONFIG_DIR/plugins/icons.sh "$app")"
   done)
 
-  if [ -z "$icon_strip" ]; then
-    icon_strip=""
+  if [ "$is_focused" = "true" ]; then
+    sketchybar --set space.$sid \
+      background.drawing=on \
+      label="${icon_strip:-}" \
+      label.color="$space_color" \
+      icon.color="$space_color"
+  else
+    sketchybar --set space.$sid \
+      background.drawing=off \
+      label="${icon_strip:-}" \
+      label.color="$space_color" \
+      icon.color=$FG_DIM
   fi
-
-  sketchybar --set space.$sid label="$icon_strip"
 }
 
 # Get all spaces info in one query (exit early if yabai is unavailable)
@@ -86,20 +90,12 @@ for sid in $ordered_ids; do
   prev="space.$sid"
 done
 
-# Reset all space backgrounds
-for sid in $current_ids; do
-  update_workspace_appearance "$sid" "false"
-done
-
-# Update focused space
+# Update each space's display, icons, and category color in one pass
 focused_space=$(echo "$spaces_info" | jq -r '.[] | select(.["has-focus"] == true) | .index')
-if [ -n "$focused_space" ]; then
-  update_workspace_appearance "$focused_space" "true"
-fi
-
-# Update icons for all spaces
 for sid in $current_ids; do
   display=$(echo "$spaces_info" | jq -r ".[] | select(.index == $sid) | .display")
   sketchybar --set space.$sid display=$display
-  update_icons "$sid"
+  is_focused="false"
+  [ "$sid" = "$focused_space" ] && is_focused="true"
+  update_space "$sid" "$is_focused"
 done

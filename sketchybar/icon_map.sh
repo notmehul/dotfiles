@@ -183,6 +183,9 @@ function __icon_map() {
    "DEVONthink 3")
         icon_result=":devonthink3:"
         ;;
+   "Dia")
+        icon_result=":arc:"
+        ;;
    "DingTalk" | "钉钉" | "阿里钉")
         icon_result=":dingtalk:"
         ;;

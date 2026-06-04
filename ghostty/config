@@ -4,7 +4,7 @@ font-size = 14
 
 # cursor
 cursor-style = bar
-cursor-color = #00e5ff
+cursor-color = #ea76cb
 cursor-style-blink = false
 
 # background
@@ -16,22 +16,22 @@ background-blur-radius = 30
 window-padding-x = 30
 window-padding-y = 30
 
-# colors — tokyo night cyberpunk
+# colors — The Dark Side
 foreground = #ffffff
 
-palette = 0=#1a1b26
-palette = 1=#ff003c
-palette = 2=#00ff9f
-palette = 3=#ffd700
-palette = 4=#0066ff
-palette = 5=#cc00ff
-palette = 6=#00ffff
+palette = 0=#1a1a1a
+palette = 1=#d20f39
+palette = 2=#40a02b
+palette = 3=#e5c07b
+palette = 4=#1e66f5
+palette = 5=#ea76cb
+palette = 6=#7287fd
 palette = 7=#c0caf5
-palette = 8=#414868
-palette = 9=#ff4daa
-palette = 10=#39ffb8
-palette = 11=#ffff66
+palette = 8=#7f848e
+palette = 9=#d20f39
+palette = 10=#9a77cf
+palette = 11=#e1ab32
 palette = 12=#4d99ff
-palette = 13=#dd88ff
-palette = 14=#80f0ff
+palette = 13=#ea76cb
+palette = 14=#9a77cf
 palette = 15=#ffffff
