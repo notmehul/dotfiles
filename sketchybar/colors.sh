@@ -43,10 +43,11 @@ export CAT_DESIGN=$C_LAVENDER     # figma, affinity, sketch
 export CAT_SYSTEM=$FG_DIM         # finder, settings, utilities
 
 # Battery status thresholds
-export BATTERY_OK=$FG             # >50% or charging
+export BATTERY_OK=$FG             # >50%, not charging
 export BATTERY_WARN=$C_ORANGE     # 30–50%
 export BATTERY_LOW=$C_AMBER       # 10–29%
 export BATTERY_CRITICAL=$C_CRIMSON  # <10%
+export BATTERY_CHARGING=$C_GREEN  # plugged in — full+bolt glyph, green
 
 # Resource graph
 export GRAPH_COLOR=$C_BLUE
