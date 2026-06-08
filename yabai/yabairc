@@ -8,7 +8,7 @@
 # see this wiki page for information:
 #  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)#configure-scripting-addition
 #
-yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+yabai -m signal --add label=dock_restart event=dock_did_restart action="sudo yabai --load-sa"
 sudo yabai --load-sa
 #
 
@@ -42,15 +42,22 @@ yabai -m config \
 	mouse_drop_action swap \
 	external_bar all:39:0
 
-yabai -m rule --add app="^(System Settings|System Information|Activity Monitor|FaceTime|Screen Sharing|Calculator|Stickies|TinkerTool|Progressive Downloader|Transmission|Airflow|^Picture in Picture$)$" manage=off
+yabai -m rule --add label=unmanaged_apps app="^(System Settings|System Information|Activity Monitor|FaceTime|Screen Sharing|Calculator|Stickies|TinkerTool|Progressive Downloader|Transmission|Airflow|^Picture in Picture$)$" manage=off
 
-yabai -m signal --add event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
-yabai -m signal --add event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
-yabai -m signal --add event=window_minimized action="sketchybar -m --trigger window_change &> /dev/null"
-yabai -m signal --add event=window_deminimized action="sketchybar -m --trigger window_change &> /dev/null"
+# Arc/Dia PiP windows report as AXSystemDialog under the browser app, not
+# "Picture in Picture", so the rule above misses them. yabai tracks them with a
+# bogus 10x10 frame at the bottom-left; with mouse_follows_focus on, clicking
+# the PiP warps the cursor there. Scope to Arc/Dia only to avoid affecting
+# other apps' AXSystemDialog windows.
+yabai -m rule --add label=browser_pip app="^(Arc|Dia)$" subrole="AXSystemDialog" manage=off mouse_follows_focus=off
 
-yabai -m signal --add event=space_created action="sketchybar --trigger space_change"
-yabai -m signal --add event=space_destroyed action="sketchybar --trigger space_change"
+yabai -m signal --add label=win_created event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
+yabai -m signal --add label=win_destroyed event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
+yabai -m signal --add label=win_minimized event=window_minimized action="sketchybar -m --trigger window_change &> /dev/null"
+yabai -m signal --add label=win_deminimized event=window_deminimized action="sketchybar -m --trigger window_change &> /dev/null"
+
+yabai -m signal --add label=space_created event=space_created action="sketchybar --trigger space_change"
+yabai -m signal --add label=space_destroyed event=space_destroyed action="sketchybar --trigger space_change"
 
 echo "yabai configuration loaded.."
 borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=2.0
