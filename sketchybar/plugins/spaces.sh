@@ -33,10 +33,14 @@ update_space() {
   is_focused=$2
 
   windows=$(yabai -m query --windows --space $sid 2>/dev/null)
-  first_app=$(echo "$windows" | jq -r '[.[] | select(.["is-minimized"] == false and .["is-hidden"] == false)] | .[0].app // ""')
+  # The Codex dictation overlay is sticky, so it lands in every space's window
+  # query and would otherwise paint its icon on every space's strip. Exclude it
+  # by title; the real Codex window (title "Codex") is unaffected.
+  visible='select(.["is-minimized"] == false and .["is-hidden"] == false and (.app != "Codex" or .title != "Dictation"))'
+  first_app=$(echo "$windows" | jq -r "[.[] | $visible] | .[0].app // \"\"")
   space_color=$([ -n "$first_app" ] && "$CONFIG_DIR/plugins/app_color.sh" "$first_app" || echo "$FG_DIM")
 
-  icon_strip=$(echo "$windows" | jq -r '.[] | select(.["is-minimized"] == false and .["is-hidden"] == false) | .app' | awk '!seen[$0]++' | head -5 | while read -r app; do
+  icon_strip=$(echo "$windows" | jq -r ".[] | $visible | .app" | awk '!seen[$0]++' | head -5 | while read -r app; do
     printf " %s" "$($CONFIG_DIR/plugins/icons.sh "$app")"
   done)
 

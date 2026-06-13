@@ -51,6 +51,13 @@ yabai -m rule --add label=unmanaged_apps app="^(System Settings|System Informati
 # other apps' AXSystemDialog windows.
 yabai -m rule --add label=browser_pip app="^(Arc|Dia)$" subrole="AXSystemDialog" manage=off mouse_follows_focus=off
 
+# The Codex dictation overlay reports as a standard window under the Codex app
+# (title "Dictation", distinct from the main "Codex" window) and is sticky, so
+# yabai was tiling it onto every space. Scope by title to exclude just the
+# overlay; manage=off keeps it floating and mouse_follows_focus=off stops the
+# cursor warping to it on focus.
+yabai -m rule --add label=codex_dictation app="^Codex$" title="^Dictation$" manage=off mouse_follows_focus=off
+
 yabai -m signal --add label=win_created event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
 yabai -m signal --add label=win_destroyed event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
 yabai -m signal --add label=win_minimized event=window_minimized action="sketchybar -m --trigger window_change &> /dev/null"
