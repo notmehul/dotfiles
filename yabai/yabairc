@@ -14,7 +14,7 @@ sudo yabai --load-sa
 
 # global settings
 yabai -m config \
-	mouse_follows_focus on \
+	mouse_follows_focus off \
 	focus_follows_mouse autofocus \
 	window_origin_display default \
 	window_placement second_child \
@@ -45,18 +45,15 @@ yabai -m config \
 yabai -m rule --add label=unmanaged_apps app="^(System Settings|System Information|Activity Monitor|FaceTime|Screen Sharing|Calculator|Stickies|TinkerTool|Progressive Downloader|Transmission|Airflow|^Picture in Picture$)$" manage=off
 
 # Arc/Dia PiP windows report as AXSystemDialog under the browser app, not
-# "Picture in Picture", so the rule above misses them. yabai tracks them with a
-# bogus 10x10 frame at the bottom-left; with mouse_follows_focus on, clicking
-# the PiP warps the cursor there. Scope to Arc/Dia only to avoid affecting
-# other apps' AXSystemDialog windows.
-yabai -m rule --add label=browser_pip app="^(Arc|Dia)$" subrole="AXSystemDialog" manage=off mouse_follows_focus=off
+# "Picture in Picture", so the rule above misses them. Keep them unmanaged so
+# yabai doesn't tile them. (Cursor warping is handled globally now that
+# mouse_follows_focus is off, so no per-rule override is needed.)
+yabai -m rule --add label=browser_pip app="^(Arc|Dia)$" subrole="AXSystemDialog" manage=off
 
 # The Codex dictation overlay reports as a standard window under the Codex app
 # (title "Dictation", distinct from the main "Codex" window) and is sticky, so
-# yabai was tiling it onto every space. Scope by title to exclude just the
-# overlay; manage=off keeps it floating and mouse_follows_focus=off stops the
-# cursor warping to it on focus.
-yabai -m rule --add label=codex_dictation app="^Codex$" title="^Dictation$" manage=off mouse_follows_focus=off
+# yabai was tiling it onto every space. Scope by title to exclude just the overlay.
+yabai -m rule --add label=codex_dictation app="^Codex$" title="^Dictation$" manage=off
 
 yabai -m signal --add label=win_created event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
 yabai -m signal --add label=win_destroyed event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
