@@ -33,13 +33,10 @@ for sid in $(echo "$spaces_info" | jq -r 'sort_by(.index) | .[].index'); do
     label.padding_right=10 \
     label.y_offset=-1 \
     click_script="$PLUGIN_DIR/space_click.sh $sid"
-
-  icon_strip=$(yabai -m query --windows --space $sid | jq -r '.[] | select(.["is-minimized"] == false and .["is-hidden"] == false) | .app' | awk '!seen[$0]++' | while read -r app; do
-    printf " %s" "$($PLUGIN_DIR/icons.sh "$app")"
-  done)
-
-  sketchybar --set space.$sid label="${icon_strip:-}"
 done
+
+# Icon strips and category colors are populated by the plugin via the
+# space_change trigger at the end of this file, so we don't compute them here.
 
 # Reorder bar items to match yabai's current space order
 prev="yabai_dummy"

@@ -1,6 +1,7 @@
 #!/bin/sh
 
 source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/plugins/app_color.sh"  # provides __app_color -> $color_result
 
 SPACE_CACHE="$HOME/.cache/sketchybar/space_ids"
 
@@ -32,15 +33,16 @@ update_space() {
   sid=$1
   is_focused=$2
 
-  windows=$(yabai -m query --windows --space $sid 2>/dev/null)
+  # Windows for this space, filtered out of the single $ALL_WINDOWS query.
   # The Codex dictation overlay is sticky, so it lands in every space's window
-  # query and would otherwise paint its icon on every space's strip. Exclude it
+  # list and would otherwise paint its icon on every space's strip. Exclude it
   # by title; the real Codex window (title "Codex") is unaffected.
-  visible='select(.["is-minimized"] == false and .["is-hidden"] == false and (.app != "Codex" or .title != "Dictation"))'
-  first_app=$(echo "$windows" | jq -r "[.[] | $visible] | .[0].app // \"\"")
-  space_color=$([ -n "$first_app" ] && "$CONFIG_DIR/plugins/app_color.sh" "$first_app" || echo "$FG_DIM")
+  visible="select(.space == $sid and .[\"is-minimized\"] == false and .[\"is-hidden\"] == false and (.app != \"Codex\" or .title != \"Dictation\"))"
+  first_app=$(echo "$ALL_WINDOWS" | jq -r "[.[] | $visible] | .[0].app // \"\"")
+  __app_color "$first_app"
+  space_color="$color_result"
 
-  icon_strip=$(echo "$windows" | jq -r ".[] | $visible | .app" | awk '!seen[$0]++' | head -5 | while read -r app; do
+  icon_strip=$(echo "$ALL_WINDOWS" | jq -r ".[] | $visible | .app" | awk '!seen[$0]++' | head -5 | while read -r app; do
     printf " %s" "$($CONFIG_DIR/plugins/icons.sh "$app")"
   done)
 
@@ -93,7 +95,10 @@ for sid in $ordered_ids; do
   prev="space.$sid"
 done
 
-# Update each space's display, icons, and category color in one pass
+# Update each space's display, icons, and category color in one pass.
+# Query every window ONCE here; update_space filters per space from $ALL_WINDOWS
+# instead of issuing a separate yabai query for each space.
+ALL_WINDOWS=$(yabai -m query --windows 2>/dev/null)
 focused_space=$(echo "$spaces_info" | jq -r '.[] | select(.["has-focus"] == true) | .index')
 for sid in $current_ids; do
   display=$(echo "$spaces_info" | jq -r ".[] | select(.index == $sid) | .display")

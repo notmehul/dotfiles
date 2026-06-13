@@ -1,35 +1,27 @@
 #!/usr/bin/env bash
 
-# Source the icon map with all the application icons
-[ -f "$CONFIG_DIR/icon_map.sh" ] || { echo ""; exit 0; }
-source "$CONFIG_DIR/icon_map.sh"
+# Resolves an app name to its glyph. The icon map is 800+ lines, so we check the
+# on-disk cache FIRST and only source/parse the map on a cache miss — most calls
+# hit the cache, so they stay cheap.
 
-# Create a cache directory if it doesn't exist
 CACHE_DIR="$HOME/.cache/sketchybar"
-mkdir -p "$CACHE_DIR"
-
-# Cache file for icon mappings
 ICON_CACHE="$CACHE_DIR/icon_cache.txt"
-
-# Create the cache file if it doesn't exist
-if [ ! -f "$ICON_CACHE" ]; then
-  touch "$ICON_CACHE"
-fi
-
-# Check if the app is already in cache
 APP_NAME="$1"
-CACHED_ICON=$(grep -F "$APP_NAME|" "$ICON_CACHE" | head -1 | cut -d '|' -f2)
 
+# Cache hit: return immediately, no map parsing.
+CACHED_ICON=$(grep -F "$APP_NAME|" "$ICON_CACHE" 2>/dev/null | head -1 | cut -d '|' -f2)
 if [ -n "$CACHED_ICON" ]; then
-  # Cache hit, return the icon
   echo "$CACHED_ICON"
   exit 0
 fi
 
-# Get icon from the mapping function
+# Cache miss: load the map, resolve, and record for next time.
+[ -f "$CONFIG_DIR/icon_map.sh" ] || { echo ""; exit 0; }
+source "$CONFIG_DIR/icon_map.sh"
 __icon_map "$APP_NAME"
 
 if [ -n "$icon_result" ]; then
+  mkdir -p "$CACHE_DIR"
   echo "$APP_NAME|$icon_result" >>"$ICON_CACHE"
 fi
 
