@@ -48,9 +48,6 @@ command -v duf   >/dev/null && alias df='duf'
 command -v fzf   >/dev/null && source <(fzf --zsh)          # Ctrl-T files, Alt-C dirs
 command -v atuin >/dev/null && eval "$(atuin init zsh)"     # Ctrl-R history (loads after fzf)
 
-# zoxide: replaces `cd` so it auto-learns dirs; `cd <partial>` jumps, `cdi` = fzf picker
-command -v zoxide >/dev/null && eval "$(zoxide init zsh --cmd cd)"
-
 # syntax highlighting — must be sourced last
 [ -f /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh ] && source /opt/homebrew/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
@@ -59,3 +56,8 @@ export BROWSER="cmux browser open"
 
 # cmux: ensure agents can always find the socket
 export CMUX_SOCKET_PATH="$HOME/.config/cmux/cmux.sock"
+
+# zoxide: replaces `cd` so it auto-learns dirs; `cd <partial>` jumps, `cdi` = fzf
+# picker. Initialized LAST so its chpwd/precmd hooks aren't clobbered by anything
+# sourced afterwards (this is what zoxide's startup "doctor" checks for).
+command -v zoxide >/dev/null && eval "$(zoxide init zsh --cmd cd)"
