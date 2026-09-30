@@ -55,6 +55,12 @@ yabai -m rule --add label=browser_pip app="^(Arc|Dia)$" subrole="AXSystemDialog"
 # yabai was tiling it onto every space. Scope by title to exclude just the overlay.
 yabai -m rule --add label=codex_dictation app="^Codex$" title="^Dictation$" manage=off
 
+# Wispr Flow's dictation overlay is a roleless, unresizable window that appears
+# and vanishes while dictating. yabai tiled it, leaving a phantom BSP leaf that
+# kept windows half-width after moving their neighbour off the space. The
+# overlay has no role or title to match on, so the whole app goes unmanaged.
+yabai -m rule --add label=wispr_flow app="^Wispr Flow$" manage=off
+
 yabai -m signal --add label=win_created event=window_created action="sketchybar -m --trigger window_change &> /dev/null"
 yabai -m signal --add label=win_destroyed event=window_destroyed action="sketchybar -m --trigger window_change &> /dev/null"
 yabai -m signal --add label=win_minimized event=window_minimized action="sketchybar -m --trigger window_change &> /dev/null"
